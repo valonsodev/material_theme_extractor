@@ -46,14 +46,17 @@ std::vector<material_color_utilities::Argb> loadImagePixels(const std::string& i
         unsigned char r = img_data[i * 4 + 0];
         unsigned char g = img_data[i * 4 + 1];
         unsigned char b = img_data[i * 4 + 2];
-        unsigned char a = preserve_alpha ? img_data[i * 4 + 3] : 255;
+        unsigned char a = channels >= 4 ? img_data[i * 4 + 3] : 0xff;
+        if (!preserve_alpha)
+        {
+            a = 0xff;
+        }
         material_color_utilities::Argb argb = pack_argb(a, r, g, b);
         pixels.push_back(argb);
     }
     stbi_image_free(img_data);
     return pixels;
 }
-
 
 enum class ColorFormat
 {
@@ -162,7 +165,6 @@ int main(int argc, char* argv[])
 {
     std::string imagePath;
 
-
     CLI::App app{"Extracts Material You color scheme from an image."};
     app.require_subcommand(0);
 
@@ -186,7 +188,6 @@ int main(int argc, char* argv[])
     theme_group->add_flag("--dark", dark_flag, "Output only dark theme (requires --contrast or auto-selects)");
     theme_group->add_flag("--light", light_flag, "Output only light theme (requires --contrast or auto-selects)");
 
-
     bool contrast_given = false;
     double contrast_level = 0.0;
     app.add_option("--contrast", contrast_level,
@@ -198,7 +199,6 @@ int main(int argc, char* argv[])
     bool preserve_alpha = false;
     app.add_flag("--preserve-alpha", preserve_alpha,
                  "Preserve original image alpha channel (default: discard and use 255) !!WARNING: THIS DOES SOME WONKY THINGS!!");
-
 
     bool debug = false;
     app.add_flag("--debug", debug, "Print debug information such as CLI args and processing details");
