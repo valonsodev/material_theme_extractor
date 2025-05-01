@@ -1,0 +1,14 @@
+*.jpg
+*.png
+
+build
+.idea
+.vscode
+
+cmake-build-debug
+
+dev_guide
+
+material_theme
+
+*.json
