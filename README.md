@@ -63,7 +63,7 @@ Behavior:
 
 The program outputs JSON to standard output.
 
-Multiple Themes (Default):
+#### Multiple Themes (Default):
 
 ```json
 {
@@ -93,7 +93,9 @@ Multiple Themes (Default):
 }
 ```
 
-Single Theme (`--dark`, `--light`, or `--contrast` used):
+---
+
+#### Single Theme (`--dark`, `--light`, or `--contrast` used):
 
 ```json
 {
@@ -105,4 +107,4 @@ Single Theme (`--dark`, `--light`, or `--contrast` used):
 }
 ```
 
-The hex color format (`#AARRGGBB` or `#RRGGBB`) depends on the `--argb` or `--rgb` flag used. ```
+The hex color format (`#AARRGGBB` or `#RRGGBB`) depends on the `--argb` or `--rgb` flag used.
